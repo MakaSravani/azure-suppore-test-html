@@ -1,0 +1,159 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eAlliance Chat bot</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Ask a Question to Athena</h1>
+    <form method="post">
+        <label for="user_question">Question:</label>
+        <input type="text" id="user_question" name="user_question" required>
+        <button type="submit">Send</button>
+    </form>
+    
+    {% if conversation_history %}
+        <h2>Conversation History:</h2>
+        <ul>
+            {% for entry in conversation_history %}
+                <li>
+                    <strong>User:</strong> {{ entry.user_question }}<br>
+                    <strong>Assistant:</strong> {{ entry.assistant_response }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eAlliance Chat bot</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+          
+            /* justify-content: center; */
+            height: 100vh;
+        }
+
+        h1 {
+            color: #333;
+            text-align: top;
+        }
+
+        .chat-input {
+            max-width: 600px;
+            /* width: 100%; */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            bottom: 0;
+            background-color: #fff;
+            /* padding: 10px; */
+        }
+
+        input {
+            /* padding: 8px; */
+            font-size: 16px;
+            line-height: 24px;
+            width: 1150px;
+            
+        }
+        input::placeholder {
+         font-size: 16px;
+         width: 1150px; /* Adjust the width as needed */
+         height : 50px;
+        }
+
+        .send-button {
+            padding: 8px 16px;
+            font-size: 16px;
+            background-color: #0000ff;
+            color: white;
+            cursor: pointer;
+        }
+        .clear-button{
+            float: right;
+            background-color: #00b7ff;
+            padding: 0px;
+        }
+
+        /* Add styling for the chat messages */
+        .chat-container {
+            max-width: 600px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            /* align-items: flex-start; */
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            width: 100%;
+        }
+
+        li {
+            margin-bottom: 10px;
+            overflow: hidden;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        .user-message {
+            align-self: flex-end;
+            /* text-align: right; */
+            color: #333;
+            background-color: #e0e0e0;
+        }
+
+        .assistant-message {
+            align-self: flex-start;
+            text-align: left;
+            color: #555;
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ask a Question to Athena</h1>
+    
+    <form method="get" action="{{ url_for('clear_history') }}">
+        <button class="clear-button"   type="submit">Clear Conversation History</button>
+    </form>
+    
+    <div class="chat-container">
+        {% if conversation_history %}
+            <h2>Conversation History:</h2>
+            <ul>
+                {% for entry in conversation_history %}
+                    <li class="user-message">
+                        <strong>User:</strong> {{ entry.user_question }}
+                    </li>
+                    <li class="assistant-message">
+                        <strong>Assistant:</strong> {{ entry.assistant_response }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+    <div class="chat-input">
+        <form method="post" style="display: flex;">
+            <input type="text" id="user_question" name="user_question" placeholder="Type your question" required style="flex: 1;">
+            <button class="send-button" type="submit" style="margin-left: 10px;">Send</button>
+        </form>
+    </div>
+</body>
+</html>
