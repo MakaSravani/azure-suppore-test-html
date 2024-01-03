@@ -161,7 +161,7 @@ def index():
             message_text = generate_message_text(user_question, "")
 
         completion = openai.ChatCompletion.create(
-           model=deployment_id, 
+           deployment_id=deployment_id, 
            messages=message_text,
            extra_body={
                 "dataSources": [
