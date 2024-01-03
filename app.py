@@ -142,6 +142,17 @@ def generate_message_text(user_question: str, assistant_response: str):
     else:
         messages.append({"role": "user", "content": user_question})
 
+     messages[-1]["dataSources"] = [
+        {
+            "type": "AzureCognitiveSearch",
+            "parameters": {
+                "endpoint": search_endpoint,
+                "key": search_key,
+                "indexName": search_index_name,
+            }
+        }
+    ]
+
     return messages
 
 
@@ -162,19 +173,8 @@ def index():
 
         completion = openai.ChatCompletion.create(
            deployment_id=deployment_id, 
-           messages=message_text,
-           extra_body={
-                "dataSources": [
-                    {
-                        "type": "AzureCognitiveSearch",
-                        "parameters": {
-                        "endpoint": search_endpoint,
-                        "key": search_key,
-                        "indexName": search_index_name,
-                    }
-                    }
-                ]
-            }
+           messages=message_text
+          
         )
 
         assistant_response = completion['choices'][0]['message']['content']
