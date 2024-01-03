@@ -101,6 +101,7 @@ from flask import  Flask, render_template, request, redirect, url_for
 import openai
 import os
 import requests
+from dotenv import load_dotenv
 
 app = Flask(__name__)
 app.static_folder = 'static'
@@ -160,18 +161,20 @@ def index():
             message_text = generate_message_text(user_question, "")
 
         completion = openai.ChatCompletion.create(
-            messages=message_text,
-            deployment_id=deployment_id,
-            dataSources=[
-                {
-                    "type": "AzureCognitiveSearch",
-                    "parameters": {
+           model=deployment_id, 
+           messages=message_text,
+           extra_body={
+                "dataSources": [
+                    {
+                        "type": "AzureCognitiveSearch",
+                        "parameters": {
                         "endpoint": search_endpoint,
                         "key": search_key,
                         "indexName": search_index_name,
                     }
-                }
-            ]
+                    }
+                ]
+            }
         )
 
         assistant_response = completion['choices'][0]['message']['content']
