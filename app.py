@@ -142,7 +142,7 @@ def generate_message_text(user_question: str, assistant_response: str):
     else:
         messages.append({"role": "user", "content": user_question})
 
-     messages[-1]["dataSources"] = [
+    messages[-1]["dataSources"] = [
         {
             "type": "AzureCognitiveSearch",
             "parameters": {
