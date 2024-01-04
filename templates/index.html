@@ -150,7 +150,7 @@
         {% endif %}
     </div>
     <div class="chat-input">
-        <form method="post" style="display: flex;">
+        <form method="post" action="{{ url_for('index') }}"  style="display: flex;">
             <input type="text" id="user_question" name="user_question" placeholder="Type your question" required style="flex: 1;">
             <button class="send-button" type="submit" style="margin-left: 10px;">Send</button>
         </form>
