@@ -161,7 +161,7 @@ def index():
             message_text = generate_message_text(user_question, "")
 
         completion = openai.ChatCompletion.create(
-           model="gpt-35-turbo-16k"
+            model="gpt-35-turbo-16k",
             messages=message_text,
             deployment_id=deployment_id,
             dataSources=[
