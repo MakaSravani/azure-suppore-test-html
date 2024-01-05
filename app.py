@@ -108,13 +108,13 @@ app.static_folder = 'static'
 
 openai.api_type = "azure"
 openai.api_version = "2023-08-01-preview"
-openai.api_base = "https://cog-cdzj2obpa54em.openai.azure.com/"
-openai.api_key = "825a0d3880054857a94fd70649196ad3"
-deployment_id = "chat"
+openai.api_base = "" #Azureopen ai  end point
+openai.api_key = "" # Azure open ai key
+deployment_id = ""  # deployment name
 
-search_endpoint = "https://gptkb-cdzj2obpa54em.search.windows.net"
-search_key = "VmM0fMtVNqbwZKbomZrZgRKnadwl12Qc3KXxMsXIzIAzSeBAgDyI"
-search_index_name = "escogidxtest"
+search_endpoint = "" # cognitive search endpoint
+search_key = "" # Conitive search key
+search_index_name = ""  # index name
 
 def setup_byod(deployment_id: str) -> None:
     class BringYourOwnDataAdapter(requests.adapters.HTTPAdapter):
